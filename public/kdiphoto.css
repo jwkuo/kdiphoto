@@ -1,0 +1,105 @@
+@CHARSET "UTF-8";
+.ui-page header{
+	text-align: center;
+}
+.ui-page .ui-title{
+	margin: 0 10px;
+}
+.ui-content{
+	max-width: 400px;
+	margin: auto;
+}
+h3{
+	text-align: center;
+}
+.preview img{
+	width: 100%;
+	border: 3px solid #C6A77D;
+	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(16, 6, 6, 1) /*{global-box-shadow-color}*/;
+}
+#order-form .package-controls, #order-form .item-controls{
+	display: inline-block;
+	vertical-align: top;
+}
+
+#order-form .package-controls div, #order-form .item-controls div{
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 0.5em 0 0;
+}
+
+#order-form .package-controls .ui-btn, #order-form .item-controls .ui-btn{
+	padding: 0.5em;
+}
+
+#order-form .package-controls .remove{
+	display: none;
+}
+
+#order-form .title{
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 1.5em;
+	margin: 0.2em;
+	white-space: normal;
+	width: 70%;
+}
+
+.package-info{
+	width: 80%;
+    float: right;
+    margin: 1em;
+}
+.ui-listview > li p{
+	font-size: 1em;
+    white-space: normal;
+    text-align: left;
+}
+.ui-content .ui-listview{
+	margin: 0 -1em;
+}
+.package-info .sheet-options{
+	list-style: none;
+    list-style-image: none;
+    text-align: center;
+    padding: 0;
+}
+.item.auto{
+	display: none;
+}
+.item-input{
+	margin: 0 0 0 4em;
+}
+.item-input label, .item-input div {
+	display: inline-block;
+	
+}
+.sheet-options li{
+	text-align:center;
+}
+.sheet-options label, .sheet-options .ui-select{
+	display: inline-block;
+  	vertical-align: middle;
+}
+.sheet-options .ui-select{
+	width: 80%;
+}
+#summary h4{
+	width: 50%;
+	float: left;
+}
+
+#summary div.ui-btn-icon-left{
+	margin: 1em -3em 0em;
+}
+
+#summary ul#details{
+	padding: 0em;
+}
+
+#summary ul#details li{
+	list-style:none;
+	list-style-image:none;
+	font-size: 1em;
+	font-weight: bold;
+}

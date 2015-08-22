@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KDI Photo</title>
+<link rel="stylesheet" href="/assets/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<link rel="stylesheet" href="/assets/scooch/scooch.css">
+<link rel="stylesheet" href="/assets/scooch/scooch-style.css">
+<link rel="stylesheet" href="/kdiphoto.css">
+<script data-main="/assets/kdiphoto" src="/assets/require.js"></script>
+</head>
+<body>
+		<div data-role="page" id="home" data-title="KDI Photo">
+			<header data-role="header">
+				<img id="logo"
+					src="/assets/kdi-logo.png"
+					alt="KDI Photo">
+					<h3>502-807-1735 <a href="mailto:kdiphoto@yahoo.com" >kdiphoto@yahoo.com</a></h3>
+			</header>
+			<div role="main" class="ui-content">
+				<a class="ui-btn" href="#lookup">Lookup Your Photo</a>
+				<div class="m-scooch m-center m-fluid m-scooch-photos" id="m-scooch-example-2">
+          <div class="m-scooch-inner">
+            <div class="m-item">
+                <img src="http://lorempixel.com/300/300/animals/?1">
+            </div>
+            <div class="m-item">
+                <img src="http://lorempixel.com/300/300/animals/?2">
+            </div>
+            <div class="m-item">
+                <img src="http://lorempixel.com/300/300/animals/?3">
+            </div>
+            <div class="m-item">
+                <img src="http://lorempixel.com/300/300/animals/?4">
+            </div>
+            <div class="m-item">
+                <img src="http://lorempixel.com/300/300/animals/?5">
+            </div>
+          </div>
+          <div class="m-scooch-controls m-scooch-bulleted">
+            <a href="#" data-m-slide="1">1</a>
+            <a href="#" data-m-slide="2">2</a>
+            <a href="#" data-m-slide="3">3</a>
+            <a href="#" data-m-slide="4">4</a>
+            <a href="#" data-m-slide="5">5</a>
+          </div>
+        </div>
+
+			</div>
+			<footer data-role="footer">
+				<h6>&copy; 2015 KDI Photo</h6>
+			</footer>
+		</div>
+		<div data-role="page" id="lookup" data-title="KDI Photo - Lookup Photo">
+			<header data-role="header">
+				<h3>Lookup Your Photo</h3>
+				<a href="#home" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button">Back</a>
+			</header>
+			<div role="main" class="ui-content">
+				<form id="lookup-form">
+					<div class="lookup">
+						<label for="client" class="lookup-label">School ID</label>
+						<input type="text" id="project" class="lookup-input" name="project">
+					</div>
+					<div class="lookup">
+						<label for="photo" class="lookup-label">Photo ID</label>
+						<input type="text" id="photo" class="lookup-input" name="photo">
+					</div>
+					<input type="submit" value="Lookup Photo">
+				</form>
+				
+			</div>
+			<footer data-role="footer">
+				<h6>&copy; 2015 KDI Photo</h6>
+			</footer>
+		</div>
+		<div data-role="page" id="order" data-title="KDI Photo - Order Form">
+			<header data-role="header">
+				<h3>Order Form</h3>
+				<a href="#lookup" class="ui-btn-left ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button">Back</a>
+			</header>
+			<div role="main" class="ui-content">
+				<div class="preview">
+					<!-- Photo goes here -->
+				</div>
+				<form id="order-form">
+					<!-- Render any packages -->
+					<!-- Render Sheet Options -->
+					<!-- Render any Individual Items -->
+				</form>
+			</div>
+			<div data-role="footer" data-position="fixed" id="checkout-footer">
+				<div id="summary" class="ui-content">
+					<h4>Order Total - $0.00</h4>
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<div id="cart"></div>
+						<input type="hidden" name="cmd" value="_cart">
+						<input type="hidden" name="upload" value="1">
+						<input type="hidden" name="business" value="jonwkuo@gmail.com">
+						<input type="hidden" name="return" value="http://kdiphoto.local.com">
+						<input type="hidden" name="cancel_return" value="http://kdiphoto.local.com">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					</form>
+					<input type="button" id="toggle-details" data-icon="carat-u" value="View Cart">
+					<ul id="details">
+					</ul>
+				</div>
+			</div>
+		</div>
+</body>
+<script id="preview-template" type="text/template">
+	<h3>Preview</h3>
+	<img src="/photos/<%= directory %>/<%= photo_id %>.jpg">
+</script>
+<script id="package-template" type="text/template">
+	<h3>Packages</h3>
+	<ul data-role="listview" class="order-form-section">
+	<% _.each(packages.toJSON(), function(package, id) { %>
+		<li id="package-<%= package.id %>" class="ui-li-static package">
+			<div class="package-controls">
+				<input id="package-add-<%= package.id %>" type="button" value="Add" class="ui-btn">
+				<input id="package-qty-<%= package.id %>" type="number" value="1" min="1" max="9">
+			</div>
+			<h4 class="title"><%= package.name %> - $<%= package.price %></h4>
+			<div class="package-info">
+				<p><%= package.description %></p>
+				<% if(package.sheet_options > 0){ %>
+					<ul class="sheet-options">
+						<% for(i=1; i <= package.sheet_options; i++){ %>
+							<li><label for="sheet-<%= i %>">Sheet <%= i %>:</label>
+							<select id="sheet-<%= i %>">
+							<% for(ii=0; ii < options.length; ii++){ %>
+								<option value="<%= options[ii] %>"><%= options[ii] %></option>
+							<% } %>
+							</select>
+							</li>
+						<% } %>
+					</ul>
+				<% } %>
+			</div>
+		</li>
+	<% }); %>
+	</ul>	
+</script>
+<script id="sheets-template" type="text/template">
+	<h3>Sheets</h3>
+	<select id="sheet-qty">
+		<option value="0">No Sheets - $0.00</option>
+		<% for (i=0; i < prices.length; i++){ %>
+			<option value="<%= i+1 %>"><%= i+1 %> Sheets - <%= prices[i] %></option>
+		<% } %>
+	</select>
+	<ul data-role="listview" id="sheet-options" class="sheet-options">
+	</ul>
+</script>
+<script id="sheets-selection-template" type="text/template">
+		<% for(i=1; i <= sheets; i++){ %>
+			<li class="ui-li-static"><label for="sheet-<%= i %>">Sheet <%= i %>:</label>
+				<select id="sheet-<%= i %>">
+					<% for(ii=0; ii < options.length; ii++){ %>
+						<option value="<%= options[ii] %>"><%= options[ii] %></option>
+					<% } %>
+				</select>
+			</li>
+		<% } %>
+</script>
+<script id="items-template" type="text/template">
+	<h3>Individual Items and Add Ons</h3>
+	<ul data-role="listview" class="order-form-section">
+		<% _.each(items.toJSON(), function(item, id) { %>
+			<li class="ui-li-static item<% if(item.auto) print(" auto"); %>">
+				<div class="item-controls">
+					<input id="add-<%= item.id %>" type="button" value="Add" class="ui-btn">
+					<% if(item.multi) { %>
+						<input id="qty-<%= item.id %>" type="number" value="1" min="1" max="9">
+					<% } %>
+				</div>
+				<h4 class="title"><%= item.name %> - $<%= item.price %></h4>
+				<% if(item.input_option) { %>
+					<div class="item-input">
+						<label for="input-<%= item.id %>"><%= item.input_label %></label>
+						<input id="input-<%= item.id %>" type="text">
+					</div>
+				<% } %>
+			</li>
+		<% }); %>
+	</ul>		
+</script>
+<script id="paypal-item-template" type="text/template">
+	<input type="hidden" name="item_name_<%= index %>" value="<%= item.name %>">
+	<input type="hidden" name="amount_<%= index %>" value="<%= item.price %>">
+	<input type="hidden" name="quantity_<%= index %>" value="<%= item.qty %>">
+</script>
+<script id="detail-template" type="text/template">
+	<li>
+		<input type="button" id="detail-<%= id %>" data-icon="delete" data-iconpos="notext" value="Delete Item">
+		<span><%= qty %> <%= name %> - $<%= price %></span>
+	</li>
+</script>
+</html>

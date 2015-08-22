@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>KDI Photo - Administration</title>
-		<link rel="stylesheet" href="/admin.css">
+		<link rel="stylesheet" href="/assets/admin.css">
 		<link rel="stylesheet" href="/assets/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
 	</head>
 	<body class="ui-mobile-viewport ui-overlay-a">

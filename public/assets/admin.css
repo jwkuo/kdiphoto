@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+.main-wrapper{
+	text-align: center;
+}
+
+.main-wrapper .container{
+	max-width: 720px;
+	min-width: 450px;
+	margin: auto;
+}
+
+.container h3{
+	text-align: center;
+}
+
+.ui-field-contain input[type="number"]{
+	width: 10%;
+	padding: 3px;
+}
