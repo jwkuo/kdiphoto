@@ -168,7 +168,7 @@
 	<h3>Individual Items and Add Ons</h3>
 	<ul data-role="listview" class="order-form-section">
 		<% _.each(items.toJSON(), function(item, id) { %>
-			<li class="ui-li-static item<% if(item.auto) print(" auto"); %>">
+			<li class="ui-li-static item<% if(item.auto == 1) print(" auto"); %>">
 				<div class="item-controls">
 					<input id="add-<%= item.id %>" type="button" value="Add" class="ui-btn">
 					<% if(item.multi) { %>
