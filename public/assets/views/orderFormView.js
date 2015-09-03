@@ -119,13 +119,25 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 				paypal_index++;
 				total = total+(item.price*item.qty);
 			}, this);
-			$("#checkout-footer h4").html("Order Total - $"+total.toFixed(2));
 			if(total > 0){
 				$("#checkout-footer").slideDown();
+				$("#checkout-footer #summary #details input[type='button']").on("click", this, this.delete_cart_item);
+				var item_ids = new Array();
+				$("#order-form ul.order-form-section li.auto input[type='button']").each(function(index){
+					item_ids[index] = this.id.substring(4);
+				});
+				_.each(item_ids, function(item_id, index){
+					var item = this.project.items.get(item_id);
+					var cart_item = {name: item.attributes.name, price: item.attributes.price, qty: 1};
+					cart_el.append(this.paypal_item_template({item: cart_item, index: paypal_index}));
+					detail_el.append(this.detail_template({id: "item-"+item_id, name: cart_item.name, price: cart_item.price*cart_item.qty, qty: cart_item.qty}));
+					total = total+(cart_item.price*cart_item.qty);
+					paypal_index++;
+				}, this);
 			}else{
 				$("#checkout-footer").slideUp();
 			}
-			$("#checkout-footer #summary #details input[type='button']").on("click", this, this.delete_cart_item);
+			$("#checkout-footer h4").html("Order Total - $"+total.toFixed(2));
 			$("#checkout-footer").enhanceWithin();
 		},
 		

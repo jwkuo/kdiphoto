@@ -46,4 +46,7 @@ require(["jquery","backbone","routers/router"], function($, Backbone, MainRouter
 		this.router = new MainRouter();
 	});
 	Backbone.history.start();
+	$(document).ready(function () {
+        $("body").attr("style", "visibility: visible;");
+});
 });
