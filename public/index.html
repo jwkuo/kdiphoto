@@ -176,7 +176,7 @@
 					<% } %>
 				</div>
 				<h4 class="title"><%= item.name %> - $<%= item.price %></h4>
-				<% if(item.input_option) { %>
+				<% if(item.input_option == 1) { %>
 					<div class="item-input">
 						<label for="input-<%= item.id %>"><%= item.input_label %></label>
 						<input id="input-<%= item.id %>" type="text">
