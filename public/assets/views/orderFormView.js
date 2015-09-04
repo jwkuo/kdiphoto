@@ -33,6 +33,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			
 			$(".preview").html(this.preview_template({directory: this.project.attributes.directory, photo_id: this.project.attributes.photo_id}));
 			this.$el.html(form).enhanceWithin();
+			this.cart = {packages: new Array(), sheets: 0, items: new Array()};
 			this.checkout_render();
 			this.delegateEvents();
 			$("#checkout-footer input#toggle-details").off();
