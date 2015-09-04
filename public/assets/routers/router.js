@@ -20,6 +20,7 @@ define(["jquery", "backbone", "views/lookupFormView", "views/orderFormView", "mo
 			$(".ui-loader").show();
 			$(".preview").hide();
 			$("#order-form").hide();
+			$("#lookup-error").hide();
 			$("#checkout-footer").hide();
 			var orderForm = this.orderForm;
 			var lookupForm = this.lookupForm;
@@ -30,17 +31,23 @@ define(["jquery", "backbone", "views/lookupFormView", "views/orderFormView", "mo
 			}
 			orderForm.project = new Project({lookup_id: lookupForm.lookup_id, photo_id: lookupForm.photo_id});
 			
-			orderForm.project.fetch().done(function(){
-				orderForm.project.packages.fetch().done(function(){
-					orderForm.project.packages.filter()
-					orderForm.project.items.fetch().done(function(){
-						orderForm.project.items.filter();
-						orderForm.render();
-						$(".ui-loader").hide();
-						$(".preview").show();
-						$("#order-form").show();
+			orderForm.project.fetch({
+				success: function(model, response, options) {
+					model.packages.fetch().done(function(){
+						model.packages.filter();
+						model.items.fetch().done(function(){
+							model.items.filter();
+							orderForm.render();
+							$(".ui-loader").hide();
+							$(".preview").show();
+							$("#order-form").show();
+						});
 					});
-				});
+				},
+				error: function() {
+					$(".ui-loader").hide();
+					$("#lookup-error").show();
+				}
 			});
 			
 			//Send the views back to the router
