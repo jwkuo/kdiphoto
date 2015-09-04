@@ -70,9 +70,6 @@
 .item.auto{
 	display: none;
 }
-.item-input{
-	margin: 0 0 0 4em;
-}
 .item-input label, .item-input div {
 	display: inline-block;
 	
