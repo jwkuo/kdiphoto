@@ -35,7 +35,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			this.$el.html(form).enhanceWithin();
 			this.checkout_render();
 			this.delegateEvents();
-			$("#checkout-footer input#toggle-details").off("click");
+			$("#checkout-footer input#toggle-details").off();
 			$("#checkout-footer input#toggle-details").on("click", this.toggle_details);
 			$("#checkout-footer #details").hide();
 			return this;
