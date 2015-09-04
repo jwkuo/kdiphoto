@@ -5,10 +5,13 @@
 .ui-page .ui-title{
 	margin: 0 10px;
 }
-.ui-content{
-	max-width: 400px;
-	margin: auto;
+@media screen and (min-width: 400px) {
+	.ui-content{
+		max-width: 400px;
+		margin: auto;
+	}	
 }
+
 h3{
 	text-align: center;
 }
