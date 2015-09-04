@@ -35,6 +35,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			this.$el.html(form).enhanceWithin();
 			this.checkout_render();
 			this.delegateEvents();
+			$("#checkout-footer input#toggle-details").off("click");
 			$("#checkout-footer input#toggle-details").on("click", this.toggle_details);
 			$("#checkout-footer #details").hide();
 			return this;
@@ -76,7 +77,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			}else{
 				var qty = 1;
 			}
-			if(item.attributes.input_option){
+			if(item.attributes.input_option == 1){
 				var name = item.attributes.name+": "+$(".item-input #input-"+id).val();
 			}else{
 				var name = item.attributes.name;
