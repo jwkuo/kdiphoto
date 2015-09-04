@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KDI Photo</title>
 <link rel="stylesheet" href="/assets/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
 <link rel="stylesheet" href="/assets/scooch/scooch.css">
@@ -95,7 +96,7 @@
 			</div>
 			<div data-role="footer" data-position="fixed" id="checkout-footer">
 				<div id="summary" class="ui-content">
-					<h4>Order Total - $0.00</h4>
+					<h3>Order Total - $0.00</h3>
 					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 						<div id="cart"></div>
 						<input type="hidden" name="cmd" value="_cart">
@@ -118,7 +119,7 @@
 </script>
 <script id="package-template" type="text/template">
 	<h3>Packages</h3>
-	<ul data-role="listview" class="order-form-section">
+	<ul data-role="listview" data-inset="true" class="order-form-section">
 	<% _.each(packages.toJSON(), function(package, id) { %>
 		<li id="package-<%= package.id %>" class="ui-li-static package">
 			<div class="package-controls">
@@ -154,12 +155,12 @@
 			<option value="<%= i+1 %>"><%= i+1 %> Sheets - <%= prices[i] %></option>
 		<% } %>
 	</select>
-	<ul data-role="listview" id="sheet-options" class="sheet-options">
+	<ul data-role="listview" data-inset="true" id="sheet-options" class="sheet-options">
 	</ul>
 </script>
 <script id="sheets-selection-template" type="text/template">
 		<% for(i=1; i <= sheets; i++){ %>
-			<li class="ui-li-static"><label for="sheet-<%= i %>">Sheet <%= i %>:</label>
+			<li><label for="sheet-<%= i %>">Sheet <%= i %>:</label>
 				<select id="sheet-<%= i %>">
 					<% for(ii=0; ii < options.length; ii++){ %>
 						<option value="<%= options[ii] %>"><%= options[ii] %></option>
@@ -170,7 +171,7 @@
 </script>
 <script id="items-template" type="text/template">
 	<h3>Individual Items and Add Ons</h3>
-	<ul data-role="listview" class="order-form-section">
+	<ul data-role="listview" data-inset="true" class="order-form-section">
 		<% _.each(items.toJSON(), function(item, id) { %>
 			<li class="ui-li-static item<% if(item.auto == 1) print(" auto"); %>">
 				<div class="item-controls">

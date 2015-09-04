@@ -2,21 +2,24 @@
 .ui-page header{
 	text-align: center;
 }
-.ui-page .ui-title{
-	margin: 0 10px;
+#logo{
+	max-width: 400px;
 }
-@media screen and (min-width: 400px) {
+/* Portrait */
+@media only screen 
+  and (min-device-width: 414px)
+  and (orientation: landscape) { 
 	.ui-content{
 		max-width: 400px;
 		margin: auto;
-	}	
+	}
 }
 
-h3{
+.preview, h3, #summary{
 	text-align: center;
 }
 .preview img{
-	width: 100%;
+	width: 95%;
 	border: 3px solid #C6A77D;
 	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ rgba(16, 6, 6, 1) /*{global-box-shadow-color}*/;
 }
@@ -58,9 +61,6 @@ h3{
     white-space: normal;
     text-align: left;
 }
-.ui-content .ui-listview{
-	margin: 0 -1em;
-}
 .package-info .sheet-options{
 	list-style: none;
     list-style-image: none;
@@ -87,17 +87,12 @@ h3{
 .sheet-options .ui-select{
 	width: 80%;
 }
-#summary h4{
-	width: 50%;
-	float: left;
+#summary h3{
+	margin: 0 0 1em 0;
 }
-
-#summary div.ui-btn-icon-left{
-	margin: 1em -3em 0em;
-}
-
 #summary ul#details{
 	padding: 0em;
+	text-align: left;
 }
 
 #summary ul#details li{

@@ -139,7 +139,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			}else{
 				$("#checkout-footer").slideUp();
 			}
-			$("#checkout-footer h4").html("Order Total - $"+total.toFixed(2));
+			$("#checkout-footer h3").html("Order Total - $"+total.toFixed(2));
 			$("#checkout-footer").enhanceWithin();
 		},
 		
