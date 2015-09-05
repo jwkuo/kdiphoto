@@ -12,7 +12,6 @@ define(["jquery", "backbone", "views/lookupFormView", "views/orderFormView", "mo
 		},
 		home: function () {
 			$(":mobile-pagecontainer").pagecontainer("change", "#home", {reverse:false, changeHash:false});
-			$("body").attr("style", "visibility: visible;");
 		},
 		lookup: function () {
 			$(":mobile-pagecontainer").pagecontainer("change", "#lookup", {reverse:false, changeHash:false});
