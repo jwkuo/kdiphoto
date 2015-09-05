@@ -12,16 +12,14 @@ define(["jquery", "backbone", "views/lookupFormView", "views/orderFormView", "mo
 		},
 		home: function () {
 			$(":mobile-pagecontainer").pagecontainer("change", "#home", {reverse:false, changeHash:false});
+			$("body").attr("style", "visibility: visible;");
 		},
 		lookup: function () {
 			$(":mobile-pagecontainer").pagecontainer("change", "#lookup", {reverse:false, changeHash:false});
 		},
 		order: function () {
 			$(".ui-loader").show();
-			$(".preview").hide();
-			$("#order-form").hide();
-			$("#lookup-error").hide();
-			$("#checkout-footer").hide();
+			$("#order").hide();
 			var orderForm = this.orderForm;
 			var lookupForm = this.lookupForm;
 			if(!lookupForm.hasOwnProperty("lookup_id")){
@@ -39,14 +37,13 @@ define(["jquery", "backbone", "views/lookupFormView", "views/orderFormView", "mo
 							model.items.filter();
 							orderForm.render();
 							$(".ui-loader").hide();
-							$(".preview").show();
-							$("#order-form").show();
+							$("#order").show();
 						});
 					});
 				},
 				error: function() {
 					$(".ui-loader").hide();
-					$("#lookup-error").show();
+					$("#order").show();
 				}
 			});
 			
