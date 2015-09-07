@@ -31,7 +31,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			form += this.sheets_template({prices: this.project.sheet_prices_array, options: this.project.sheet_options_array});
 			form += this.items_template({items: this.project.items});
 			
-			$(".preview").html(this.preview_template({directory: this.project.attributes.directory, photo_id: this.project.attributes.photo_id}));
+			$(".preview").html(this.preview_template({directory: this.project.get("directory"), photo_id: this.project.get("photo_id")}));
 			this.$el.html(form).enhanceWithin();
 			this.cart = {packages: new Array(), sheets: 0, items: new Array()};
 			this.checkout_render();
@@ -56,16 +56,16 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			var id = e.target.id.substring(12);
 			var p = this.project.packages.get(id);
 			var qty = $("#package-"+id+" .package-controls input#package-qty-"+id).val();
-			var name = p.attributes.name;
-			if(p.attributes.sheet_options > 0){
+			var name = p.get("name");
+			if(p.get("sheet_options") > 0){
 				var sheet_list = "";
-				for(i=1; i <= p.attributes.sheet_options; i++){
+				for(i=1; i <= p.get("sheet_options"); i++){
 					var sheet = $("#package-"+id+" .package-info .sheet-options #sheet-"+i).val();
 					sheet_list = sheet_list+sheet+", ";
 				}
 				name = name+": "+sheet_list.substring(0, sheet_list.length-2);
 			}
-			var item = {name: name, price: p.attributes.price, qty: qty};
+			var item = {name: name, price: p.get("price"), qty: qty};
 			this.cart.packages.push(item);
 			this.checkout_render();
 		},
@@ -73,17 +73,17 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 		add_item: function(e) {
 			var id = e.target.id.substring(4);
 			var item = this.project.items.get(id);
-			if(item.attributes.multi){
+			if(item.get("multi")){
 				var qty = $(".item-controls #qty-"+id).val();
 			}else{
 				var qty = 1;
 			}
-			if(item.attributes.input_option == 1){
-				var name = item.attributes.name+": "+$(".item-input #input-"+id).val();
+			if(item.get("input_option") == 1){
+				var name = item.get("name")+": "+$(".item-input #input-"+id).val();
 			}else{
-				var name = item.attributes.name;
+				var name = item.get("name");
 			}
-			this.cart.items.push({name: name, price: item.attributes.price, qty: qty});
+			this.cart.items.push({name: name, price: item.get("price"), qty: qty});
 			this.checkout_render();
 		},
 		
@@ -94,7 +94,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			cart_el.empty();
 			detail_el.empty();
 			_.each(this.cart.packages, function(item, id) {
-				cart_el.append(this.paypal_item_template({item: item, index: id+1}));
+				cart_el.append(this.paypal_item_template({item: item, index: id+1, photo_id: this.project.get("photo_id")}));
 				detail_el.append(this.detail_template({id: "package-"+id, name: item.name, price: item.price*item.qty, qty: item.qty}));
 				total = total+(item.price*item.qty);
 			}, this);
@@ -110,13 +110,13 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 						price: parseFloat(this.project.sheet_prices_array[this.cart.sheets-1].substring(1))
 				};
 				paypal_index++;
-				cart_el.append(this.paypal_item_template({item: sheet_item, index: paypal_index}));
+				cart_el.append(this.paypal_item_template({item: sheet_item, index: paypal_index, photo_id: this.project.get("photo_id")}));
 				detail_el.append(this.detail_template({id: "sheets", name: sheet_item.name, price: sheet_item.price, qty: this.cart.sheets}));
 				total = total+sheet_item.price;
 			}
 			paypal_index++;
 			_.each(this.cart.items, function(item, id) {
-				cart_el.append(this.paypal_item_template({item: item, index: paypal_index}));
+				cart_el.append(this.paypal_item_template({item: item, index: paypal_index, photo_id: this.project.get("photo_id")}));
 				detail_el.append(this.detail_template({id: "item-"+id, name: item.name, price: item.price*item.qty, qty: item.qty}));
 				paypal_index++;
 				total = total+(item.price*item.qty);
@@ -131,7 +131,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 				_.each(item_ids, function(item_id, index){
 					var item = this.project.items.get(item_id);
 					var cart_item = {name: item.attributes.name, price: item.attributes.price, qty: 1};
-					cart_el.append(this.paypal_item_template({item: cart_item, index: paypal_index}));
+					cart_el.append(this.paypal_item_template({item: cart_item, index: paypal_index, photo_id: this.project.get("photo_id")}));
 					detail_el.append(this.detail_template({id: "item-"+item_id, name: cart_item.name, price: cart_item.price*cart_item.qty, qty: cart_item.qty}));
 					total = total+(cart_item.price*cart_item.qty);
 					paypal_index++;

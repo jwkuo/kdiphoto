@@ -13,8 +13,7 @@ define(["jquery", "backbone", "collections/packages", "collections/items"], func
 			
 		},
 		idAttribute: "lookup_id",
-		urlRoot: "/api/project",
-		photo_id: ""
+		urlRoot: "/api/project"
 	});
 	return Project;
 });
