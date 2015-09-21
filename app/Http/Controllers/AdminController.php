@@ -127,7 +127,7 @@ class AdminController extends Controller {
 			return redirect('admin/login');
 		}
 		$project = Project::find($project_id);
-		if($request->method() == 'POST'){			
+		if($request->method() == 'POST'){		
 			$project->fill($request->input());
 			$project->save();
 			return redirect('admin/projects?save=true');

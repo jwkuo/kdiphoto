@@ -73,6 +73,14 @@
 					<p>Set the prices in order of quantity.
 					The number of prices determines the number of sheets a customer may buy.
 					List the prices of your sheets separated by a comma. (i.e. $12.00, $22.00, $30.00)</p>
+					<div class="ui-bar ui-bar-a ui-corner-all"><h2>Sheet Promotion (Optional)</h2></div>
+					<div class="ui-field-contain">
+						<label for="sheet_prices">Sheet Promo Text:</label>
+						<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+							<input type="textarea" name="sheet_promo" id="sheet_promo" value="<?php print $project->sheet_promo; ?>">
+						</div>
+					</div>
+					<p>Provide a promotional text for purchasing sheets. (i.e. FREE 5.x7 class photo with 3 or more sheets!)</p>
 					<div class="ui-bar ui-bar-a ui-corner-all"><h2>Individuals, Add Ons, and Tack Ons</h2></div>
 					<a href="/admin/projects/<?php print $project->id; ?>/items/create" class="ui-btn ui-input-btn ui-corner-all ui-shadow">Create Item</a>
 					<p>Got a special sheet for a fixed price? An option to add to all sheets? Need to tack on a shipping fee?

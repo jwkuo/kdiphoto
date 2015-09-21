@@ -15,7 +15,7 @@ class Project extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['lookup_id', 'directory', 'name', 'sheet_options', 'sheet_prices'];
+	protected $fillable = ['lookup_id', 'directory', 'name', 'sheet_options', 'sheet_prices', 'sheet_promo'];
 	/**
 	 * The base directory for looking up photos
 	 * 

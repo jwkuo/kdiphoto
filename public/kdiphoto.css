@@ -56,6 +56,10 @@
     float: right;
     margin: 1em;
 }
+#order-form p{
+	text-align: center;
+}
+
 .ui-listview > li p{
 	font-size: 1em;
     white-space: normal;

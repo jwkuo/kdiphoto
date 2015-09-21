@@ -149,6 +149,9 @@
 </script>
 <script id="sheets-template" type="text/template">
 	<h3>Sheets</h3>
+	<% if (sheet_promo.length) { %>
+		<p><%= sheet_promo %></p>
+	<% } %>
 	<select id="sheet-qty">
 		<option value="0">No Sheets - $0.00</option>
 		<% for (i=0; i < prices.length; i++){ %>

@@ -28,7 +28,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			if(this.project.packages.length){
 				form += this.package_template({packages: this.project.packages, options: this.project.sheet_options_array});
 			}
-			form += this.sheets_template({prices: this.project.sheet_prices_array, options: this.project.sheet_options_array});
+			form += this.sheets_template({prices: this.project.sheet_prices_array, options: this.project.sheet_options_array, sheet_promo: this.project.get("sheet_promo")});
 			form += this.items_template({items: this.project.items});
 			
 			$(".preview").html(this.preview_template({directory: this.project.get("directory"), photo_id: this.project.get("photo_id")}));
