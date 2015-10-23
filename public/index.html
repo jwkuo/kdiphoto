@@ -195,7 +195,7 @@
 	</ul>		
 </script>
 <script id="paypal-item-template" type="text/template">
-	<input type="hidden" name="item_name_<%= index %>" value="<%= item.name %>">
+	<input type="hidden" name="item_name_<%= index %>" value="<%= item.name %> for project <%= project_id %>">
 	<input type="hidden" name="amount_<%= index %>" value="<%= item.price %>">
 	<input type="hidden" name="quantity_<%= index %>" value="<%= item.qty %>">
 	<input type="hidden" name="on0_<%= index %>" value="Photo ID">

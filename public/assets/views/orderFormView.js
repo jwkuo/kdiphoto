@@ -94,7 +94,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 			cart_el.empty();
 			detail_el.empty();
 			_.each(this.cart.packages, function(item, id) {
-				cart_el.append(this.paypal_item_template({item: item, index: id+1, photo_id: this.project.get("photo_id")}));
+				cart_el.append(this.paypal_item_template({item: item, index: id+1, project_id: this.project.id, photo_id: this.project.get("photo_id")}));
 				detail_el.append(this.detail_template({id: "package-"+id, name: item.name, price: item.price*item.qty, qty: item.qty}));
 				total = total+(item.price*item.qty);
 			}, this);
@@ -110,13 +110,13 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 						price: parseFloat(this.project.sheet_prices_array[this.cart.sheets-1].substring(1))
 				};
 				paypal_index++;
-				cart_el.append(this.paypal_item_template({item: sheet_item, index: paypal_index, photo_id: this.project.get("photo_id")}));
+				cart_el.append(this.paypal_item_template({item: sheet_item, index: paypal_index, project_id: this.project.id, photo_id: this.project.get("photo_id")}));
 				detail_el.append(this.detail_template({id: "sheets", name: sheet_item.name, price: sheet_item.price, qty: this.cart.sheets}));
 				total = total+sheet_item.price;
 			}
 			paypal_index++;
 			_.each(this.cart.items, function(item, id) {
-				cart_el.append(this.paypal_item_template({item: item, index: paypal_index, photo_id: this.project.get("photo_id")}));
+				cart_el.append(this.paypal_item_template({item: item, index: paypal_index, project_id: this.project.id, photo_id: this.project.get("photo_id")}));
 				detail_el.append(this.detail_template({id: "item-"+id, name: item.name, price: item.price*item.qty, qty: item.qty}));
 				paypal_index++;
 				total = total+(item.price*item.qty);
@@ -131,7 +131,7 @@ define(["jquery", "backbone", "models/project"], function($, Backbone, Project){
 				_.each(item_ids, function(item_id, index){
 					var item = this.project.items.get(item_id);
 					var cart_item = {name: item.attributes.name, price: item.attributes.price, qty: 1};
-					cart_el.append(this.paypal_item_template({item: cart_item, index: paypal_index, photo_id: this.project.get("photo_id")}));
+					cart_el.append(this.paypal_item_template({item: cart_item, index: paypal_index, project_id: this.project.id, photo_id: this.project.get("photo_id")}));
 					detail_el.append(this.detail_template({id: "item-"+item_id, name: cart_item.name, price: cart_item.price*cart_item.qty, qty: cart_item.qty}));
 					total = total+(cart_item.price*cart_item.qty);
 					paypal_index++;
